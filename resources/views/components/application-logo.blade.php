@@ -42,6 +42,6 @@
 
     <!-- متن فارسی با فونت مدرن -->
     <text x="100" y="180" text-anchor="middle" fill="#fff" font-family="Tahoma, Arial, sans-serif" font-size="11" font-weight="bold" letter-spacing="0.5">
-        سامانه مدیریت اکانت‌ها
+        مدیریت بیمه نامه ها
     </text>
 </svg>

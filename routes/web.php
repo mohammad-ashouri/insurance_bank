@@ -1,16 +1,8 @@
 <?php
 
-use App\Livewire\BankAccounts\Index as BankAccountsIndex;
-use App\Livewire\BankAccounts\Invoices as BankAccountsReport;
-use App\Livewire\Services\Index as ServicesIndex;
-use App\Livewire\Services\Create as ServicesCreate;
-use App\Livewire\Services\Invoices\Index as ServicesFactorCreate;
 use App\Livewire\Catalogs\Banks;
-use App\Livewire\Catalogs\Cycles;
-use App\Livewire\Catalogs\Fields;
+use App\Livewire\Catalogs\InsuranceType;
 use App\Livewire\Catalogs\Roles;
-use App\Livewire\Catalogs\ServiceType;
-use App\Livewire\Catalogs\ServiceTypeField;
 use App\Livewire\Dashboard;
 use App\Livewire\User\Profile;
 use App\Livewire\Users\Create as UsersCreate;
@@ -27,9 +19,9 @@ Route::get('/profile', Profile::class)
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', Dashboard::class)->name('dashboard');
 
-    Route::prefix('catalog')->group(function () {
+    Route::prefix('catalogs')->group(function () {
         Route::get('roles', Roles::class)->name('roles');
-        Route::get('banks', Banks::class)->name('banks');
+        Route::get('insurance_types', InsuranceType::class)->name('insurance-type');
     });
 
 //    Route::prefix('services')->group(function () {

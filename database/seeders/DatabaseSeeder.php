@@ -2,9 +2,7 @@
 
 namespace Database\Seeders;
 
-use Database\Seeders\DataSeeders\BankSeeder;
-use Database\Seeders\DataSeeders\CycleSeeder;
-use Database\Seeders\DataSeeders\FieldTypeSeeder;
+use Database\Seeders\DataSeeders\InsuranceTypeSeeder;
 use Illuminate\Database\Seeder;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -18,9 +16,7 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             PermissionsSeeder::class,
-            FieldTypeSeeder::class,
-            CycleSeeder::class,
-            BankSeeder::class,
+            InsuranceTypeSeeder::class,
         ]);
     }
 }

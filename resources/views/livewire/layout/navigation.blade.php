@@ -32,7 +32,7 @@ new class extends Component {
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" wire:navigate>
                         داشبورد
                     </x-nav-link>
-                    @canany(['مقادیر اولیه | مدیریت نقش های کاربری','مقادیر اولیه | مدیریت سیکل های صورتحساب'])
+                    @canany(['مقادیر اولیه | مدیریت نقش های کاربری','مقادیر اولیه | مدیریت انواع بیمه'])
                         <div
                             class="hidden sm:flex sm:items-center sm:ms-6">
                             <x-dropdown align="left" width="48">
@@ -58,44 +58,15 @@ new class extends Component {
                                             نقش های کاربری
                                         </x-dropdown-link>
                                     @endcan
-                                    @can('مقادیر اولیه | مدیریت سیکل های صورتحساب')
-                                        <x-dropdown-link :href="route('cycles')" wire:navigate>
-                                            سیکل های صورتحساب
-                                        </x-dropdown-link>
-                                    @endcan
-                                    @can('مقادیر اولیه | مدیریت بانک ها')
-                                        <x-dropdown-link :href="route('banks')" wire:navigate>
-                                            بانک ها
-                                        </x-dropdown-link>
-                                    @endcan
-                                    @can('مقادیر اولیه | مدیریت فیلد ها')
-                                        <x-dropdown-link :href="route('fields')" wire:navigate>
-                                            فیلد ها
-                                        </x-dropdown-link>
-                                    @endcan
-                                    @can('مقادیر اولیه | مدیریت انواع سرویس')
-                                        <x-dropdown-link :href="route('service_types')" wire:navigate>
-                                            انواع سرویس
+                                    @can('مقادیر اولیه | مدیریت انواع بیمه')
+                                        <x-dropdown-link :href="route('insurance-type')" wire:navigate>
+                                            انواع بیمه
                                         </x-dropdown-link>
                                     @endcan
                                 </x-slot>
                             </x-dropdown>
                         </div>
                     @endcanany
-                    @can('مدیریت حساب های بانکی | صفحه اصلی')
-                        <x-nav-link :href="route('bank_accounts.index')"
-                                    :active="request()->routeIs('bank_accounts.index')"
-                                    wire:navigate>
-                            حساب های بانکی
-                        </x-nav-link>
-                    @endcan
-                    @can('مدیریت سرویس ها | صفحه اصلی')
-                        <x-nav-link :href="route('services.index')"
-                                    :active="request()->routeIs('services.index')"
-                                    wire:navigate>
-                            سرویس ها
-                        </x-nav-link>
-                    @endcan
                     @can('مدیریت کاربران | منو')
                         <x-nav-link :href="route('users.index')" :active="request()->routeIs('users.index')"
                                     wire:navigate>
@@ -161,7 +132,7 @@ new class extends Component {
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" wire:navigate>
                 داشبورد
             </x-responsive-nav-link>
-            @canany(['مقادیر اولیه | مدیریت نقش های کاربری','مقادیر اولیه | سیکل های صورتحساب'])
+            @canany(['مقادیر اولیه | مدیریت نقش های کاربری','مقادیر اولیه | انواع بیمه'])
                 <div class="flex items-center sm:hidden">
                     <x-dropdown align="left" width="48">
                         <x-slot name="trigger">
@@ -186,44 +157,15 @@ new class extends Component {
                                     نقش های کاربری
                                 </x-dropdown-link>
                             @endcan
-                            @can('مقادیر اولیه | سیکل های صورتحساب')
-                                <x-dropdown-link :href="route('cycles')" wire:navigate>
-                                    سیکل های صورتجساب
-                                </x-dropdown-link>
-                            @endcan
-                            @can('مقادیر اولیه | بانک ها')
-                                <x-dropdown-link :href="route('banks')" wire:navigate>
-                                    بانک ها
-                                </x-dropdown-link>
-                            @endcan
-                            @can('مقادیر اولیه | فیلد ها')
-                                <x-dropdown-link :href="route('fields')" wire:navigate>
-                                    فیلد ها
-                                </x-dropdown-link>
-                            @endcan
-                            @can('مقادیر اولیه | مدیریت انواع سرویس')
-                                <x-dropdown-link :href="route('service_types')" wire:navigate>
-                                    انواع سرویس
+                            @can('مقادیر اولیه | مدیریت انواع بیمه')
+                                <x-dropdown-link :href="route('insurance-type')" wire:navigate>
+                                    انواع بیمه
                                 </x-dropdown-link>
                             @endcan
                         </x-slot>
                     </x-dropdown>
                 </div>
             @endcanany
-            @can('مدیریت حساب های بانکی | صفحه اصلی')
-                <x-responsive-nav-link :href="route('bank_accounts.index')"
-                                       :active="request()->routeIs('bank_accounts.index')"
-                                       wire:navigate>
-                    حساب های بانکی
-                </x-responsive-nav-link>
-            @endcan
-            @can('مدیریت سرویس ها | صفحه اصلی')
-                <x-responsive-nav-link :href="route('services.index')"
-                                       :active="request()->routeIs('services.index')"
-                                       wire:navigate>
-                    سرویس ها
-                </x-responsive-nav-link>
-            @endcan
             @can('مدیریت کاربران | منو')
                 <x-responsive-nav-link :href="route('users.index')" :active="request()->routeIs('users.index')"
                                        wire:navigate>

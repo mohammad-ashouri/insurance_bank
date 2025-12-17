@@ -14,49 +14,49 @@
                 </div>
             </div>
         </div>
-        <div class="max-w-7xl mx-auto">
-            <div class="grid grid-cols-2 gap-1">
-                <x-cards.two_box_card
-                        title="وضعیت سرویس ها"
-                        blue_side_label="تعداد کل"
-                        blue_side_value="{{ (clone $services)->count() }}"
-                        green_side_label="فعال"
-                        green_side_value="{{ (clone $services)->where('status',1)->count() }}"
-                        red_side_label="غیرفعال"
-                        red_side_value="{{ (clone $services)->where('status',0)->count() }}"
-                        :grid_cols="3"
-                />
-                <x-cards.two_box_card
-                        title="وضعیت انقضا سرویس ها"
-                        green_side_label="منقضی نشده"
-                        green_side_value="{{ $not_expired }}"
-                        red_side_label="منقضی شده"
-                        red_side_value="{{ $expired }}"
-                />
-                <div class="grid grid-cols-2 gap-2">
-                    @foreach($service_status as $name=>$status)
-                        <x-cards.two_box_card
-                                title="سرویس: {{ $name }}"
-                                green_side_label="منقضی نشده"
-                                green_side_value="{{ $status['not_expired'] }}"
-                                red_side_label="منقضی شده"
-                                red_side_value="{{ $status['expired'] }}"
-                        />
-                    @endforeach
-                </div>
-            </div>
-            <div class="grid grid-cols-2 gap-1">
-                <x-cards.two_box_card
-                        title="وضعیت حساب های بانکی"
-                        blue_side_label="تعداد کل"
-                        blue_side_value="{{ (clone $bank_accounts)->count() }}"
-                        green_side_label="فعال"
-                        green_side_value="{{ (clone $bank_accounts)->where('status',1)->count() }}"
-                        red_side_label="غیرفعال"
-                        red_side_value="{{ (clone $bank_accounts)->where('status',0)->count() }}"
-                        :grid_cols="3"
-                />
-            </div>
-        </div>
+{{--        <div class="max-w-7xl mx-auto">--}}
+{{--            <div class="grid grid-cols-2 gap-1">--}}
+{{--                <x-cards.two_box_card--}}
+{{--                        title="وضعیت سرویس ها"--}}
+{{--                        blue_side_label="تعداد کل"--}}
+{{--                        blue_side_value="{{ (clone $services)->count() }}"--}}
+{{--                        green_side_label="فعال"--}}
+{{--                        green_side_value="{{ (clone $services)->where('status',1)->count() }}"--}}
+{{--                        red_side_label="غیرفعال"--}}
+{{--                        red_side_value="{{ (clone $services)->where('status',0)->count() }}"--}}
+{{--                        :grid_cols="3"--}}
+{{--                />--}}
+{{--                <x-cards.two_box_card--}}
+{{--                        title="وضعیت انقضا سرویس ها"--}}
+{{--                        green_side_label="منقضی نشده"--}}
+{{--                        green_side_value="{{ $not_expired }}"--}}
+{{--                        red_side_label="منقضی شده"--}}
+{{--                        red_side_value="{{ $expired }}"--}}
+{{--                />--}}
+{{--                <div class="grid grid-cols-2 gap-2">--}}
+{{--                    @foreach($service_status as $name=>$status)--}}
+{{--                        <x-cards.two_box_card--}}
+{{--                                title="سرویس: {{ $name }}"--}}
+{{--                                green_side_label="منقضی نشده"--}}
+{{--                                green_side_value="{{ $status['not_expired'] }}"--}}
+{{--                                red_side_label="منقضی شده"--}}
+{{--                                red_side_value="{{ $status['expired'] }}"--}}
+{{--                        />--}}
+{{--                    @endforeach--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--            <div class="grid grid-cols-2 gap-1">--}}
+{{--                <x-cards.two_box_card--}}
+{{--                        title="وضعیت حساب های بانکی"--}}
+{{--                        blue_side_label="تعداد کل"--}}
+{{--                        blue_side_value="{{ (clone $bank_accounts)->count() }}"--}}
+{{--                        green_side_label="فعال"--}}
+{{--                        green_side_value="{{ (clone $bank_accounts)->where('status',1)->count() }}"--}}
+{{--                        red_side_label="غیرفعال"--}}
+{{--                        red_side_value="{{ (clone $bank_accounts)->where('status',0)->count() }}"--}}
+{{--                        :grid_cols="3"--}}
+{{--                />--}}
+{{--            </div>--}}
+{{--        </div>--}}
     </div>
 </div>

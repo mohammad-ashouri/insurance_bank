@@ -7,12 +7,13 @@ use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Facades\Excel;
 use Rappasoft\LaravelLivewireTables\DataTableComponent;
 use Rappasoft\LaravelLivewireTables\Views\Column;
-use App\Models\Catalogs\Field;
+use App\Models\Catalogs\InsuranceType;
+use Rappasoft\LaravelLivewireTables\Views\Filters\SelectFilter;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
-class FieldsTable extends DataTableComponent
+class InsuranceTypesTable extends DataTableComponent
 {
-    protected $model = Field::class;
+    protected $model = InsuranceType::class;
 
     public function configure(): void
     {
@@ -30,21 +31,17 @@ class FieldsTable extends DataTableComponent
         return [
             Column::make("Id", "id")
                 ->sortable(),
-            Column::make("نوع فیلد", "fieldTypeInfo.name")
-                ->sortable()
-                ->searchable(),
             Column::make("نام", "name")
-                ->sortable()
-                ->searchable(),
-            Column::make("نام انگلیسی", "model_name")
-                ->sortable()
-                ->searchable(),
-            Column::make("مقادیر", "options")
-                ->format(function ($field, $options) {
-                    return !empty($options->options) ? implode(',', json_decode($options->options, true)) : null;
+                ->sortable(),
+            Column::make('وضعیت', "status")
+                ->format(function ($value,$row){
+                    return view('components.table.toggle', [
+                        'checked' => (bool)$value,
+                        'id' => $row->id,
+                    ]);
                 })
-                ->sortable()
-                ->searchable(),
+                ->html()
+                ->sortable(),
             Column::make('عملیات')
                 ->label(fn($row) => view('components.table.actions', [
                     'row' => $row,
@@ -56,6 +53,23 @@ class FieldsTable extends DataTableComponent
         ];
     }
 
+    public function filters(): array
+    {
+        return [
+            SelectFilter::make('وضعیت')
+                ->options([
+                    '' => 'همه',
+                    true => 'فعال',
+                    false => 'غیرفعال',
+                ])
+                ->filter(function ($query, $value) {
+                    if (isset($value) and $value !== '') {
+                        $query->where('status', $value);
+                    }
+                }),
+        ];
+    }
+
     public function exportExcel(): BinaryFileResponse
     {
         $query = $this->builder();
@@ -64,20 +78,18 @@ class FieldsTable extends DataTableComponent
             $search = $this->getSearch();
             $query->where(function ($q) use ($search) {
                 $q->where('name', 'like', "%{$search}%");
-                $q->orWhereHas('fieldTypeInfo', function ($query) use ($search) {
-                    $query->where('name', 'like', "%{$search}%");
-                });
-                $q->orWhere('model_name', 'like', "%{$search}%");
             });
+        }
+
+        if (isset($this->getAppliedFilters()['وضعیت'])) {
+            $query->where('status', $this->getAppliedFilters()['وضعیت']);
         }
 
         $data = $query->get()->map(function ($item) {
             return [
                 'id' => $item->id,
-                'نوع فیلد' => $item->fieldTypeInfo->name,
                 'نام' => $item->name,
-                'نام انگلیسی' => $item->model_name,
-                'مقادیر' => !empty($item->options) ? implode(',', json_decode($item->options, true)) : null,
+                'وضعیت' => $item->status ? 'فعال' : 'غیرفعال',
             ];
         });
 
@@ -98,6 +110,6 @@ class FieldsTable extends DataTableComponent
             {
                 return array_keys($this->data[0]);
             }
-        }, 'مقادیر اولیه - فیلد ها.xlsx');
+        }, 'مقادیر اولیه - بانک ها.xlsx');
     }
 }

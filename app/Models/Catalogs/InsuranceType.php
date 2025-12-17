@@ -7,10 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Bank extends Model
+class InsuranceType extends Model
 {
-    use SoftDeletes;
-    protected $table = "banks";
+    protected $table = "insurance_types";
     protected $fillable = [
         'id',
         'name',
@@ -36,5 +35,4 @@ class Bank extends Model
     {
         return $this->belongsTo(User::class, 'editor');
     }
-    //
 }

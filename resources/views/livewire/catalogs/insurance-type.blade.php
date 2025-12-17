@@ -1,7 +1,7 @@
 <div>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            مقادیر اولیه - بانک ها
+            مقادیر اولیه - انواع بیمه
         </h2>
     </x-slot>
 
@@ -9,10 +9,10 @@
         <div class=" mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
-                    @can('مقادیر اولیه | مدیریت بانک ها')
+                    @can('مقادیر اولیه | مدیریت انواع بیمه')
                         <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
                                 x-on:click="$dispatch('resetForm'); $dispatch('open-modal', 'create');"
-                                title="بانک جدید">بانک جدید
+                                title="جدید"> جدید
                         </button>
                     @endcan
 
@@ -21,7 +21,7 @@
                             <div class="p-4 ">
                                 <div class="flex items-center justify-between">
                                     <h2 class="text-xl font-semibold text-gray-800 dark:text-gray-200 leading-tight"
-                                    >بانک جدید
+                                    >انواع بیمه جدید
                                     </h2>
                                     <button x-on:click="$dispatch('close-modal', 'create')"
                                             class="text-gray-500 dark:text-gray-400 hover:text-gray-700">
@@ -46,7 +46,7 @@
                             <div class="p-4 ">
                                 <div class="flex items-center justify-between">
                                     <h2 class="text-xl font-semibold text-gray-800 dark:text-gray-200 leading-tight"
-                                    >ویرایش بانک
+                                    >ویرایش انواع بیمه
                                     </h2>
                                 </div>
                                 <div class="mt-4 space-y-1">
@@ -77,7 +77,7 @@
 
                     <hr class="mt-2 border-gray-500 mb-2"/>
 
-                    @livewire('tables.catalogs.banks-table')
+                    @livewire('tables.catalogs.insurance-types-table')
 
                 </div>
             </div>
