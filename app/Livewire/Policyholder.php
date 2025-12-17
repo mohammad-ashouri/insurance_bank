@@ -1,6 +1,6 @@
 <?php
 
-namespace [namespace];
+namespace App\Livewire;
 
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -8,7 +8,8 @@ use Illuminate\Foundation\Application;
 use Livewire\Attributes\Title;
 use Livewire\Component;
 
-class [class] extends Component
+#[Title('مدیریت بیمه گذاران')]
+class Policyholder extends Component
 {
 
     /**
@@ -17,6 +18,6 @@ class [class] extends Component
      */
     public function render(): View|Application|Factory|\Illuminate\View\View
     {
-        return view('[view]');
+        return view('livewire.policyholder');
     }
 }
