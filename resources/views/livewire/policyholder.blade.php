@@ -21,7 +21,7 @@
                             <div class="p-4 ">
                                 <div class="flex items-center justify-between">
                                     <h2 class="text-xl font-semibold text-gray-800 dark:text-gray-200 leading-tight"
-                                    >بیمه گذاران جدید
+                                    >بیمه گذار جدید
                                     </h2>
                                     <button x-on:click="$dispatch('close-modal', 'create')"
                                             class="text-gray-500 dark:text-gray-400 hover:text-gray-700">
@@ -46,7 +46,7 @@
                             <div class="p-4 ">
                                 <div class="flex items-center justify-between">
                                     <h2 class="text-xl font-semibold text-gray-800 dark:text-gray-200 leading-tight"
-                                    >ویرایش بیمه گذاران
+                                    >ویرایش بیمه گذار
                                     </h2>
                                 </div>
                                 <div class="mt-4 space-y-1">
@@ -77,7 +77,7 @@
 
                     <hr class="mt-2 border-gray-500 mb-2"/>
 
-                    @livewire('tables.catalogs.insurance-types-table')
+                    @livewire('tables.policyholders-table')
 
                 </div>
             </div>

@@ -31,7 +31,15 @@ class PolicyholdersTable extends DataTableComponent
         return [
             Column::make("Id", "id")
                 ->sortable(),
-            Column::make("نام", "name")
+            Column::make("نام", "first_name")
+                ->sortable(),
+            Column::make("نام خانوادگی", "last_name")
+                ->sortable(),
+            Column::make("نام پدر", "father_name")
+                ->sortable(),
+            Column::make("کد ملی", "national_code")
+                ->sortable(),
+            Column::make("تاریخ تولد", "birthdate")
                 ->sortable(),
             Column::make('وضعیت', "status")
                 ->format(function ($value,$row){
