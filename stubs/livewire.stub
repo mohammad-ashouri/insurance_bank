@@ -1,0 +1,18 @@
+<?php
+
+namespace [namespace];
+
+use Livewire\Component;
+
+class [class] extends Component
+{
+
+    /**
+     * Render the component
+     * @return View|Application|Factory|\Illuminate\View\View
+     */
+    public function render(): View|Application|Factory|\Illuminate\View\View
+    {
+        return view('[view]');
+    }
+}
