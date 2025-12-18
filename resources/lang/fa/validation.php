@@ -54,6 +54,17 @@ return [
 
     'attributes' => [
         'name' => 'نام',
+        'first_name' => 'نام',
+        'last_name' => 'نام خانوادگی',
+        'father_name' => 'نام پدر',
+        'personal_photo' => 'تصویر پرسنلی',
+        'id_card_photo' => 'تصویر صفحه اول شناسنامه',
+        'national_photo_file_up' => 'تصویر کارت ملی (رو)',
+        'national_photo_file_down' => 'تصویر کارت ملی (پشت)',
+        'postal_code' => 'کدپستی',
+        'mobile' => 'موبایل',
+        'birthdate' => 'تاریخ تولد',
+        'national_code' => 'کد ملی',
         'email' => 'ایمیل',
         'password' => 'رمز عبور',
         'description' => 'توضیحات',
