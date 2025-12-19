@@ -285,7 +285,7 @@
                                         </div>
                                         <x-input-error class="mt-2"
                                                        :messages="$errors->get('form.national_photo_file_up')"/>
-                                        <x-image alt="برای نمایش کلیک کنید" src="{{ $this->national_photo_file_up!=null ? $this->national_photo_file_up->src : null }}"/>
+                                        @if($this->national_photo_file_up!=null) <x-image alt="برای نمایش کلیک کنید" src="{{ $this->national_photo_file_up->src }}"/> @endif
                                     </div>
                                     <div class="mt-4 space-y-1">
                                         <div class="space-y-1 w-full">
@@ -308,6 +308,7 @@
                                         </div>
                                         <x-input-error class="mt-2"
                                                        :messages="$errors->get('form.national_photo_file_down')"/>
+                                        @if($this->national_photo_file_down!=null) <x-image alt="برای نمایش کلیک کنید" src="{{ $this->national_photo_file_down->src }}"/> @endif
                                     </div>
                                     <div class="mt-4 space-y-1">
                                         <div class="space-y-1 w-full">
@@ -330,6 +331,7 @@
                                         </div>
                                         <x-input-error class="mt-2"
                                                        :messages="$errors->get('form.id_card_photo')"/>
+                                        @if($this->id_card_photo!=null) <x-image alt="برای نمایش کلیک کنید" src="{{ $this->id_card_photo->src }}"/> @endif
                                     </div>
                                     <div class="mt-4 space-y-1">
                                         <div class="space-y-1 w-full">
@@ -352,6 +354,7 @@
                                         </div>
                                         <x-input-error class="mt-2"
                                                        :messages="$errors->get('form.personal_photo')"/>
+                                        @if($this->personal_photo!=null) <x-image alt="برای نمایش کلیک کنید" src="{{ $this->personal_photo->src }}"/> @endif
                                     </div>
                                 </div>
                             </div>
