@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Tables;
 
+use App\Models\User;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Facades\Excel;
@@ -23,6 +24,7 @@ class PolicyholdersTable extends DataTableComponent
         $this->setSearchDebounce(1000);
         $this->setSearchIcon('heroicon-m-magnifying-glass');
         $this->setDefaultSort('created_at', 'desc');
+        $this->setQueryStringStatusForSearch(true);
     }
 
     protected $listeners = ['refreshTable' => '$refresh'];
@@ -33,31 +35,41 @@ class PolicyholdersTable extends DataTableComponent
             Column::make("Id", "id")
                 ->sortable(),
             Column::make("نام", "first_name")
-                ->sortable(),
+                ->sortable()
+                ->searchable(),
             Column::make("نام خانوادگی", "last_name")
-                ->sortable(),
+                ->sortable()
+                ->searchable(),
             Column::make("نام پدر", "father_name")
-                ->sortable(),
+                ->sortable()
+                ->searchable(),
             Column::make("کد ملی", "national_code")
-                ->sortable(),
+                ->sortable()
+                ->searchable(),
             Column::make("تاریخ تولد", "birthdate")
-                ->sortable(),
+                ->sortable()
+                ->searchable(),
             Column::make("شماره همراه", "mobile")
-                ->sortable(),
+                ->sortable()
+                ->searchable(),
             Column::make("ثبت کننده", "adderInfo.name")
-                ->sortable(),
+                ->sortable()
+                ->searchable(),
             Column::make('تاریخ ثبت',"created_at")
                 ->format(function ($model) {
                     return Jalalian::forge($model)->format('H:i:s Y/m/d');
                 })
-                ->sortable(),
+                ->sortable()
+                ->searchable(),
             Column::make("ویرایشگر", "editorInfo.name")
-                ->sortable(),
+                ->sortable()
+                ->searchable(),
             Column::make('تاریخ ویرایش',"updated_at")
                 ->format(function ($date,$model) {
                     return $model['editorInfo.name']!=null ? Jalalian::forge($date)->format('H:i:s Y/m/d') : null;
                 })
-                ->sortable(),
+                ->sortable()
+                ->searchable(),
             Column::make('عملیات')
                 ->label(fn($row) => view('components.table.actions', [
                     'row' => $row,
@@ -71,6 +83,9 @@ class PolicyholdersTable extends DataTableComponent
 
     public function filters(): array
     {
+        $all=[0 => 'همه'];
+        $adders=array_merge($all,User::whereIn('id',Policyholder::distinct('adder')->pluck('adder')->toArray())->orderBy('name')->pluck('name','id')->toArray());
+        $editors=array_merge($all,User::whereIn('id',Policyholder::distinct('editor')->pluck('adder')->toArray())->orderBy('name')->pluck('name','id')->toArray());
         return [
             SelectFilter::make('وضعیت')
                 ->options([
@@ -80,7 +95,21 @@ class PolicyholdersTable extends DataTableComponent
                 ])
                 ->filter(function ($query, $value) {
                     if (isset($value) and $value !== '') {
-                        $query->where('status', $value);
+                        $query->where('policyholders.status', $value);
+                    }
+                }),
+            SelectFilter::make('ثبت کننده')
+                ->options($adders)
+                ->filter(function ($query, $value) {
+                    if (isset($value) and $value !== '') {
+                        $query->where('policyholders.adder', $value);
+                    }
+                }),
+            SelectFilter::make('ویرایشگر')
+                ->options($editors)
+                ->filter(function ($query, $value) {
+                    if (isset($value) and $value !== '') {
+                        $query->where('policyholders.editor', $value);
                     }
                 }),
         ];
