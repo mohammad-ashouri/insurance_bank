@@ -40,7 +40,7 @@
                                 <div class="grid grid-cols-3 gap-2">
                                     <div class="mt-4 space-y-1">
                                         <x-input-label value="بیمه گذار*"/>
-                                        <x-tag-input :tags="$policyholders" :loadDefaultTags="true" variable="form.policy_holder_id"/>
+                                        <x-tag-input :ignore="false" :tags="$policyholders" :loadDefaultTags="true" variable="form.policy_holder_id"/>
                                         <x-input-error class="mt-2" :messages="$errors->get('form.first_name')"/>
                                     </div>
                                     <div class="mt-4 space-y-1">
