@@ -3,7 +3,8 @@
     'wireModel' => '',
     'variable'=>'form.tags',
     'ignore'=>true,
-    'loadDefaultTags'=>false
+    'loadDefaultTags'=>false,
+    'allowUserInput'=>true,
   ])
 
 @php
@@ -26,6 +27,7 @@
 
         initializeTagify() {
             const input = this.$refs.input;
+            const allowUserInput = @json($allowUserInput);
 
             if (this.tagify) {
                 this.tagify.destroy();
@@ -46,7 +48,9 @@
                 editTags: false,
                 maxTags: undefined,
                 backspace: true,
-                originalInputValueFormat: valuesArr => valuesArr.map(item => item.value)
+                mode: 'select',
+                originalInputValueFormat: valuesArr => valuesArr.map(item => item.value),
+                enforceWhitelist: allowUserInput,
             });
 
             // تنظیم مقادیر اولیه

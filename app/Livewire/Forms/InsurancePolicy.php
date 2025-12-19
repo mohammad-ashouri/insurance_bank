@@ -7,5 +7,5 @@ use Livewire\Form;
 
 class InsurancePolicy extends Form
 {
-    //
+    public $policy_holder_id;
 }

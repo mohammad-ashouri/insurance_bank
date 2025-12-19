@@ -57,6 +57,8 @@ class InsurancePolicy extends Component
             abort(403, 'دسترسی غیرمجاز');
         }
 
+        dd($this->form->policy_holder_id);
+
         $this->form->validate();
 
         $catalog = new \App\Models\InsurancePolicy();
@@ -179,16 +181,14 @@ class InsurancePolicy extends Component
      */
     public function render(): View|Application|Factory|\Illuminate\View\View
     {
-        $policyholders = \App\Models\Policyholder::where('status', 1)
+        $policyholders=[];
+        $allPolicyholders = \App\Models\Policyholder::where('status', 1)
             ->orderBy('last_name')
-            ->get()
-            ->map(function ($item) {
-                return [
-                    'id' => $item->id,
-                    'full_name' => $item->policyholder_full_name,
-                ];
-            })
-            ->toArray();
+            ->get();
+        foreach ($allPolicyholders as $policyholder) {
+            $policyholders[] = $policyholder->policyholder_full_name;
+        }
+
         $insurance_types = InsuranceType::where('status', 1)
             ->orderBy('name')
             ->pluck('name', 'id')

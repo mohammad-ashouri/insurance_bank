@@ -40,11 +40,11 @@
                                 <div class="grid grid-cols-3 gap-2">
                                     <div class="mt-4 space-y-1">
                                         <x-input-label value="بیمه گذار*"/>
-                                        <x-tag-input :ignore="false" :tags="$policyholders" :loadDefaultTags="true" variable="form.policy_holder_id"/>
+                                        <x-tag-input :tags="$policyholders" :allowUserInput="false" variable="form.policy_holder_id"/>
                                         <x-input-error class="mt-2" :messages="$errors->get('form.first_name')"/>
                                     </div>
                                     <div class="mt-4 space-y-1">
-                                        <x-input-label value="مالک وسیله نفلیه(اختیاری)"/>
+                                        <x-input-label value="مالک وسیله نقلیه(اختیاری)"/>
                                         <x-text-input wire:model="form.last_name" class="w-full"
                                                       placeholder="نام خانوادگی را وارد کنید"/>
                                         <x-input-error class="mt-2" :messages="$errors->get('form.last_name')"/>
