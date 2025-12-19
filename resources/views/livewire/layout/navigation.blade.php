@@ -73,6 +73,12 @@ new class extends Component {
                             مدیریت بیمه گذاران
                         </x-nav-link>
                     @endcan
+                    @can('مدیریت بیمه نامه ها')
+                        <x-nav-link :href="route('insurance-policy')"
+                                               :active="request()->routeIs('insurance-policy')" wire:navigate>
+                            مدیریت بیمه نامه ها
+                        </x-nav-link>
+                    @endcan
                     @can('مدیریت کاربران | منو')
                         <x-nav-link :href="route('users.index')" :active="request()->routeIs('users.index')"
                                     wire:navigate>
@@ -174,6 +180,12 @@ new class extends Component {
                         <x-responsive-nav-link :href="route('policyholders')"
                                                :active="request()->routeIs('policyholders')" wire:navigate>
                             مدیریت بیمه گذاران
+                        </x-responsive-nav-link>
+                    @endcan
+                    @can('مدیریت بیمه نامه ها')
+                        <x-responsive-nav-link :href="route('insurance-policy')"
+                                    :active="request()->routeIs('insurance-policy')" wire:navigate>
+                            مدیریت بیمه نامه ها
                         </x-responsive-nav-link>
                     @endcan
                 </div>

@@ -4,6 +4,7 @@ use App\Livewire\Catalogs\Banks;
 use App\Livewire\Catalogs\InsuranceType;
 use App\Livewire\Catalogs\Roles;
 use App\Livewire\Dashboard;
+use App\Livewire\InsurancePolicy;
 use App\Livewire\Policyholder;
 use App\Livewire\User\Profile;
 use App\Livewire\Users\Create as UsersCreate;
@@ -26,6 +27,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     });
 
     Route::get('policyholders', Policyholder::class)->name('policyholders');
+
+    Route::get('insurance-policies', InsurancePolicy::class)->name('insurance-policy');
 
     Route::prefix('users')->group(function () {
         Route::get('/', UsersIndex::class)->name('users.index');

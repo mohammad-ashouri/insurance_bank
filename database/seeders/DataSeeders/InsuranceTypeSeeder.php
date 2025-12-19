@@ -12,7 +12,7 @@ class InsuranceTypeSeeder extends Seeder
      */
     public function run(): void
     {
-        InsuranceType::insert([
+        $insurance_types=[
             [
                 'name' => 'شخص ثالث',
                 'adder' => 1,
@@ -25,6 +25,10 @@ class InsuranceTypeSeeder extends Seeder
                 'name' => 'عمر و سرمایه گذاری',
                 'adder' => 1,
             ],
-        ]);
+        ];
+        foreach ($insurance_types as $insurance_type) {
+            InsuranceType::firstOrCreate($insurance_type);
+        }
+
     }
 }

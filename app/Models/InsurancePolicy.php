@@ -2,28 +2,24 @@
 
 namespace App\Models;
 
+use App\Models\Catalogs\InsuranceType;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Policyholder extends Model
+class InsurancePolicy extends Model
 {
     use SoftDeletes;
-
-    protected $table = "policyholders";
+    protected $table = "insurance_policies";
     protected $fillable = [
         'id',
-        'first_name',
-        'last_name',
-        'father_name',
-        'national_code',
-        'birthdate',
-        'mobile',
-        'email',
-        'address',
-        'postal_code',
-        'status',
+        'policyholder_id',
+        'owner_id',
+        'insurance_type_id',
+        'starts_at',
+        'ends_at',
+        'insurance_policy_number',
         'adder',
         'editor',
     ];
@@ -36,6 +32,21 @@ class Policyholder extends Model
         'deleted_at'
     ];
 
+    public function policyholderInfo(): BelongsTo
+    {
+        return $this->belongsTo(policyholder::class);
+    }
+
+    public function ownerInfo(): BelongsTo
+    {
+        return $this->belongsTo(policyholder::class);
+    }
+
+    public function insuranceTypeInfo(): BelongsTo
+    {
+        return $this->belongsTo(InsuranceType::class);
+    }
+
     public function adderInfo(): BelongsTo
     {
         return $this->belongsTo(User::class, 'adder');
@@ -44,14 +55,5 @@ class Policyholder extends Model
     public function editorInfo(): BelongsTo
     {
         return $this->belongsTo(User::class, 'editor');
-    }
-
-    /**
-     * Return policyholder full name
-     * @return string
-     */
-    public function getPolicyholderFullNameAttribute(): string
-    {
-        return "$this->first_name $this->last_name";
     }
 }
