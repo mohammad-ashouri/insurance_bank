@@ -41,14 +41,7 @@ class PolicyholdersTable extends DataTableComponent
                 ->sortable(),
             Column::make("تاریخ تولد", "birthdate")
                 ->sortable(),
-            Column::make('وضعیت', "status")
-                ->format(function ($value,$row){
-                    return view('components.table.toggle', [
-                        'checked' => (bool)$value,
-                        'id' => $row->id,
-                    ]);
-                })
-                ->html()
+            Column::make("شماره همراه", "mobile")
                 ->sortable(),
             Column::make('عملیات')
                 ->label(fn($row) => view('components.table.actions', [
@@ -96,8 +89,12 @@ class PolicyholdersTable extends DataTableComponent
         $data = $query->get()->map(function ($item) {
             return [
                 'id' => $item->id,
-                'نام' => $item->name,
-                'وضعیت' => $item->status ? 'فعال' : 'غیرفعال',
+                'نام' => $item->first_name,
+                'نام خانوادگی' => $item->last_name,
+                'نام پدر' => $item->father_name,
+                'کد ملی' => $item->national_code,
+                'تاریخ تولد' => $item->birthdate,
+                'شماره همراه' => $item->mobile,
             ];
         });
 
@@ -118,6 +115,6 @@ class PolicyholdersTable extends DataTableComponent
             {
                 return array_keys($this->data[0]);
             }
-        }, 'مقادیر اولیه - بانک ها.xlsx');
+        }, 'بیمه گذاران.xlsx');
     }
 }

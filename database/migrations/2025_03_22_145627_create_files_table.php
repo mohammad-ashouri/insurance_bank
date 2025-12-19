@@ -17,7 +17,7 @@ return new class extends Migration {
             $table->string('model')->nullable();
             $table->integer('model_id')->nullable();
             $table->string('src');
-            $table->boolean('status')->default(false)->after('src');
+            $table->boolean('status')->default(true)->after('src');
             $table->unsignedBigInteger('adder')->nullable();
             $table->foreign('adder')->references('id')->on('users');
             $table->unsignedBigInteger('editor')->nullable();
