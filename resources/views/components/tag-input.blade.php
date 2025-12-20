@@ -5,6 +5,7 @@
     'ignore'=>true,
     'loadDefaultTags'=>false,
     'allowUserInput'=>true,
+    'placeholderText'=>'کلیدواژه ها را انتخاب کنید'
   ])
 
 @php
@@ -13,10 +14,10 @@
 @endphp
 
 <div
-    @if($ignore)
-        wire:ignore
-    @endif
-    x-data="{
+        @if($ignore)
+            wire:ignore
+        @endif
+        x-data="{
         tagify: null,
 
         init() {
@@ -36,11 +37,11 @@
             this.tagify = new Tagify(input, {
                 whitelist: {{ $whitelist }},
                 dropdown: {
-                    mapValueTo: 'full',
+                    mapValueTo: 'label',
                     classname: 'tagify__dropdown--rtl',
                     enabled: 0,
-                    RTL: true,
-                    escapeHTML: false
+                    escapeHTML: false,
+                    searchKeys: ['label'],
                 },
                 duplicates: false,
                 skipInvalid: false,
@@ -49,8 +50,13 @@
                 maxTags: undefined,
                 backspace: true,
                 mode: 'select',
-                originalInputValueFormat: valuesArr => valuesArr.map(item => item.value),
+                originalInputValueFormat: valuesArr =>
+                    valuesArr.map(item => ({
+                        id: item.value,
+                        label: item.label
+                })),
                 enforceWhitelist: allowUserInput,
+                tagTextProp: 'label',
             });
 
             // تنظیم مقادیر اولیه
@@ -62,7 +68,11 @@
 
             // هندل کردن تغییرات
             this.tagify.on('add', (e) => {
-                const currentTags = this.tagify.value.map(tag => tag.value);
+                const currentTags = this.tagify.value.map(tag => ({
+                    id: tag.value,
+                    label: tag.label
+                }));
+
                 @this.set('{{ $variable }}', currentTags);
             });
 
@@ -106,7 +116,7 @@
         }
     </style>
     <div class="tag-container" wire:ignore>
-        <input name='rtl' class='tagify--rtl' placeholder='کلیدواژه ها را انتخاب کنید' x-ref="input">
+        <input name='rtl' class='tagify--rtl' placeholder='{{ $placeholderText }}' x-ref="input">
     </div>
 </div>
 

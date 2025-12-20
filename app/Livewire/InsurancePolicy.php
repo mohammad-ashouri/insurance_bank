@@ -27,11 +27,6 @@ class InsurancePolicy extends Component
 
     public bool $status = true;
 
-    public $insurance_policy_photo = null;
-    public $vehicle_registration_card = null;
-    public $id_card_photo = null;
-    public $personal_photo = null;
-
     /**
      * Listeners
      * @var string[]
@@ -56,8 +51,6 @@ class InsurancePolicy extends Component
         if (!auth()->user()->can('مدیریت بیمه نامه ها')) {
             abort(403, 'دسترسی غیرمجاز');
         }
-
-        dd($this->form->policy_holder_id);
 
         $this->form->validate();
 
@@ -181,17 +174,26 @@ class InsurancePolicy extends Component
      */
     public function render(): View|Application|Factory|\Illuminate\View\View
     {
-        $policyholders=[];
-        $allPolicyholders = \App\Models\Policyholder::where('status', 1)
+        $policyholders = \App\Models\Policyholder::where('status', 1)
             ->orderBy('last_name')
-            ->get();
-        foreach ($allPolicyholders as $policyholder) {
-            $policyholders[] = $policyholder->policyholder_full_name;
-        }
+            ->get()
+            ->map(function ($policyholder) {
+                return [
+                    'value' => $policyholder->id,
+                    'label' => "$policyholder->policyholder_full_name ($policyholder->mobile)",
+                ];
+            })
+            ->toArray();
 
         $insurance_types = InsuranceType::where('status', 1)
             ->orderBy('name')
-            ->pluck('name', 'id')
+            ->get()
+            ->map(function ($insurance_type) {
+                return [
+                    'value' => $insurance_type->id,
+                    'label' => $insurance_type->name,
+                ];
+            })
             ->toArray();
 
         return view('livewire.insurance-policy', [

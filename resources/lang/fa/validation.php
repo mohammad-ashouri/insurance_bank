@@ -105,5 +105,8 @@ return [
         'field_type' => 'نوع فیلد',
         'model_name' => 'نام انگلیسی',
         'delivered_to' => 'تحویل گیرنده',
+        'insurance_policy_photo' => 'تصویر کارت بیمه',
+        'vehicle_registration_card_up' => 'تصویر گواهینامه (رو)',
+        'vehicle_registration_card_down' => 'تصویر گواهینامه (پشت)',
     ],
 ];

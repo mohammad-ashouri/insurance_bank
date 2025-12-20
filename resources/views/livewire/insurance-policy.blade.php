@@ -40,14 +40,30 @@
                                 <div class="grid grid-cols-3 gap-2">
                                     <div class="mt-4 space-y-1">
                                         <x-input-label value="بیمه گذار*"/>
-                                        <x-tag-input :tags="$policyholders" :allowUserInput="false" variable="form.policy_holder_id"/>
-                                        <x-input-error class="mt-2" :messages="$errors->get('form.first_name')"/>
+                                        <x-tag-input
+                                                :tags="$policyholders"
+                                                :allowUserInput="false"
+                                                placeholder-text="بیمه گذار را انتخاب کنید"
+                                                variable="form.policy_holder_id"/>
+                                        <x-input-error class="mt-2" :messages="$errors->get('form.policy_holder_id')"/>
                                     </div>
                                     <div class="mt-4 space-y-1">
-                                        <x-input-label value="مالک وسیله نقلیه(اختیاری)"/>
-                                        <x-text-input wire:model="form.last_name" class="w-full"
-                                                      placeholder="نام خانوادگی را وارد کنید"/>
-                                        <x-input-error class="mt-2" :messages="$errors->get('form.last_name')"/>
+                                        <x-input-label value="مالک وسیله نقلیه*"/>
+                                        <x-tag-input
+                                                :tags="$policyholders"
+                                                :allowUserInput="false"
+                                                placeholder-text="مالک وسیله نقلیه را انتخاب کنید"
+                                                variable="form.owner_id"/>
+                                        <x-input-error class="mt-2" :messages="$errors->get('form.owner_id')"/>
+                                    </div>
+                                    <div class="mt-4 space-y-1">
+                                        <x-input-label value="نوع بیمه*"/>
+                                        <x-tag-input
+                                                :tags="$insurance_types"
+                                                :allowUserInput="false"
+                                                placeholder-text="نوع بیمه را انتخاب کنید"
+                                                variable="form.owner_id"/>
+                                        <x-input-error class="mt-2" :messages="$errors->get('form.owner_id')"/>
                                     </div>
                                     <div class="mt-4 space-y-1">
                                         <x-input-label value="تاریخ شروع بیمه نامه(اختیاری)"/>
@@ -73,7 +89,7 @@
                                 <div class="grid grid-cols-2 gap-2">
                                     <div class="mt-4 space-y-1">
                                         <div class="space-y-1 w-full">
-                                            <x-input-label value="تصویر کارت ملی (رو)(اختیاری)"/>
+                                            <x-input-label value="تصویر کارت بیمه(اختیاری)"/>
                                             <x-filepond::upload wire:model="form.insurance_policy_photo"
                                                                 :accept="'image/jpg,image/png,image/jpeg,image.bmp'"
                                                                 :allowMultiple="false"
@@ -95,15 +111,15 @@
                                     </div>
                                     <div class="mt-4 space-y-1">
                                         <div class="space-y-1 w-full">
-                                            <x-input-label value="تصویر کارت ملی (پشت)(اختیاری)"/>
-                                            <x-filepond::upload wire:model="form.vehicle_registration_card"
+                                            <x-input-label value="تصویر کارت ماشین (رو)(اختیاری)"/>
+                                            <x-filepond::upload wire:model="form.vehicle_card_up"
                                                                 :accept="'image/jpg,image/png,image/jpeg,image.bmp'"
                                                                 :allowMultiple="false"
                                                                 :instantUpload="true"
                                                                 server-headers='@json(["X-CSRF-TOKEN" => csrf_token()])'
                                                                 :chunkSize="2000000"/>
                                             <x-input-error class="mt-2"
-                                                           :messages="$errors->get('form.vehicle_registration_card')"/>
+                                                           :messages="$errors->get('form.vehicle_card_up')"/>
                                             <x-input-info
                                                     :messages="[
                                                 'فرمت‌های مجاز: png,jpg,jpeg,bmp',
@@ -113,19 +129,19 @@
                                                     class="mb-4"/>
                                         </div>
                                         <x-input-error class="mt-2"
-                                                       :messages="$errors->get('form.vehicle_registration_card')"/>
+                                                       :messages="$errors->get('form.vehicle_card_up')"/>
                                     </div>
                                     <div class="mt-4 space-y-1">
                                         <div class="space-y-1 w-full">
-                                            <x-input-label value="تصویر صفحه اول شناسنامه(اختیاری)"/>
-                                            <x-filepond::upload wire:model="form.id_card_photo"
+                                            <x-input-label value="تصویر کارت ماشین (پشت)(اختیاری)"/>
+                                            <x-filepond::upload wire:model="form.vehicle_card_down"
                                                                 :accept="'image/jpg,image/png,image/jpeg,image.bmp'"
                                                                 :allowMultiple="false"
                                                                 :instantUpload="true"
                                                                 server-headers='@json(["X-CSRF-TOKEN" => csrf_token()])'
                                                                 :chunkSize="2000000"/>
                                             <x-input-error class="mt-2"
-                                                           :messages="$errors->get('form.id_card_photo')"/>
+                                                           :messages="$errors->get('form.vehicle_card_down')"/>
                                             <x-input-info
                                                     :messages="[
                                                 'فرمت‌های مجاز: png,jpg,jpeg,bmp',
@@ -135,19 +151,19 @@
                                                     class="mb-4"/>
                                         </div>
                                         <x-input-error class="mt-2"
-                                                       :messages="$errors->get('form.id_card_photo')"/>
+                                                       :messages="$errors->get('form.vehicle_card_down')"/>
                                     </div>
                                     <div class="mt-4 space-y-1">
                                         <div class="space-y-1 w-full">
-                                            <x-input-label value="تصویر پرسنلی(اختیاری)"/>
-                                            <x-filepond::upload wire:model="form.personal_photo"
+                                            <x-input-label value="تصویر گواهینامه (رو)(اختیاری)"/>
+                                            <x-filepond::upload wire:model="form.vehicle_registration_card_up"
                                                                 :accept="'image/jpg,image/png,image/jpeg,image.bmp'"
                                                                 :allowMultiple="false"
                                                                 :instantUpload="true"
                                                                 server-headers='@json(["X-CSRF-TOKEN" => csrf_token()])'
                                                                 :chunkSize="2000000"/>
                                             <x-input-error class="mt-2"
-                                                           :messages="$errors->get('form.personal_photo')"/>
+                                                           :messages="$errors->get('form.vehicle_registration_card_up')"/>
                                             <x-input-info
                                                     :messages="[
                                                 'فرمت‌های مجاز: png,jpg,jpeg,bmp',
@@ -157,7 +173,29 @@
                                                     class="mb-4"/>
                                         </div>
                                         <x-input-error class="mt-2"
-                                                       :messages="$errors->get('form.personal_photo')"/>
+                                                       :messages="$errors->get('form.vehicle_registration_card_up')"/>
+                                    </div>
+                                    <div class="mt-4 space-y-1">
+                                        <div class="space-y-1 w-full">
+                                            <x-input-label value="تصویر گواهینامه (پشت)(اختیاری)"/>
+                                            <x-filepond::upload wire:model="form.vehicle_registration_card_down"
+                                                                :accept="'image/jpg,image/png,image/jpeg,image.bmp'"
+                                                                :allowMultiple="false"
+                                                                :instantUpload="true"
+                                                                server-headers='@json(["X-CSRF-TOKEN" => csrf_token()])'
+                                                                :chunkSize="2000000"/>
+                                            <x-input-error class="mt-2"
+                                                           :messages="$errors->get('form.vehicle_registration_card_down')"/>
+                                            <x-input-info
+                                                    :messages="[
+                                                'فرمت‌های مجاز: png,jpg,jpeg,bmp',
+                                                'حداکثر حجم فایل: 5MB',
+                                            ]"
+                                                    type="info"
+                                                    class="mb-4"/>
+                                        </div>
+                                        <x-input-error class="mt-2"
+                                                       :messages="$errors->get('form.vehicle_registration_card_down')"/>
                                     </div>
                                 </div>
                             </div>
@@ -235,100 +273,6 @@
                                         <x-text-input wire:model="form.email" class="w-full"
                                                       placeholder="ایمیل را وارد کنید"/>
                                         <x-input-error class="mt-2" :messages="$errors->get('form.email')"/>
-                                    </div>
-                                </div>
-                                <div class="grid grid-cols-2 gap-2">
-                                    <div class="mt-4 space-y-1">
-                                        <div class="space-y-1 w-full">
-                                            <x-input-label value="تصویر کارت ملی (رو)(اختیاری)"/>
-                                            <x-filepond::upload wire:model="form.insurance_policy_photo"
-                                                                :accept="'image/jpg,image/png,image/jpeg,image.bmp'"
-                                                                :allowMultiple="false"
-                                                                :instantUpload="true"
-                                                                server-headers='@json(["X-CSRF-TOKEN" => csrf_token()])'
-                                                                :chunkSize="2000000"/>
-                                            <x-input-error class="mt-2"
-                                                           :messages="$errors->get('form.insurance_policy_photo')"/>
-                                            <x-input-info
-                                                    :messages="[
-                                                'فرمت‌های مجاز: png,jpg,jpeg,bmp',
-                                                'حداکثر حجم فایل: 5MB',
-                                            ]"
-                                                    type="info"
-                                                    class="mb-4"/>
-                                        </div>
-                                        <x-input-error class="mt-2"
-                                                       :messages="$errors->get('form.insurance_policy_photo')"/>
-                                        @if($this->insurance_policy_photo!=null) <x-image alt="برای نمایش کلیک کنید" src="{{ $this->insurance_policy_photo->src }}"/> @endif
-                                    </div>
-                                    <div class="mt-4 space-y-1">
-                                        <div class="space-y-1 w-full">
-                                            <x-input-label value="تصویر کارت ملی (پشت)(اختیاری)"/>
-                                            <x-filepond::upload wire:model="form.vehicle_registration_card"
-                                                                :accept="'image/jpg,image/png,image/jpeg,image.bmp'"
-                                                                :allowMultiple="false"
-                                                                :instantUpload="true"
-                                                                server-headers='@json(["X-CSRF-TOKEN" => csrf_token()])'
-                                                                :chunkSize="2000000"/>
-                                            <x-input-error class="mt-2"
-                                                           :messages="$errors->get('form.vehicle_registration_card')"/>
-                                            <x-input-info
-                                                    :messages="[
-                                                'فرمت‌های مجاز: png,jpg,jpeg,bmp',
-                                                'حداکثر حجم فایل: 5MB',
-                                            ]"
-                                                    type="info"
-                                                    class="mb-4"/>
-                                        </div>
-                                        <x-input-error class="mt-2"
-                                                       :messages="$errors->get('form.vehicle_registration_card')"/>
-                                        @if($this->vehicle_registration_card!=null) <x-image alt="برای نمایش کلیک کنید" src="{{ $this->vehicle_registration_card->src }}"/> @endif
-                                    </div>
-                                    <div class="mt-4 space-y-1">
-                                        <div class="space-y-1 w-full">
-                                            <x-input-label value="تصویر صفحه اول شناسنامه(اختیاری)"/>
-                                            <x-filepond::upload wire:model="form.id_card_photo"
-                                                                :accept="'image/jpg,image/png,image/jpeg,image.bmp'"
-                                                                :allowMultiple="false"
-                                                                :instantUpload="true"
-                                                                server-headers='@json(["X-CSRF-TOKEN" => csrf_token()])'
-                                                                :chunkSize="2000000"/>
-                                            <x-input-error class="mt-2"
-                                                           :messages="$errors->get('form.id_card_photo')"/>
-                                            <x-input-info
-                                                    :messages="[
-                                                'فرمت‌های مجاز: png,jpg,jpeg,bmp',
-                                                'حداکثر حجم فایل: 5MB',
-                                            ]"
-                                                    type="info"
-                                                    class="mb-4"/>
-                                        </div>
-                                        <x-input-error class="mt-2"
-                                                       :messages="$errors->get('form.id_card_photo')"/>
-                                        @if($this->id_card_photo!=null) <x-image alt="برای نمایش کلیک کنید" src="{{ $this->id_card_photo->src }}"/> @endif
-                                    </div>
-                                    <div class="mt-4 space-y-1">
-                                        <div class="space-y-1 w-full">
-                                            <x-input-label value="تصویر پرسنلی(اختیاری)"/>
-                                            <x-filepond::upload wire:model="form.personal_photo"
-                                                                :accept="'image/jpg,image/png,image/jpeg,image.bmp'"
-                                                                :allowMultiple="false"
-                                                                :instantUpload="true"
-                                                                server-headers='@json(["X-CSRF-TOKEN" => csrf_token()])'
-                                                                :chunkSize="2000000"/>
-                                            <x-input-error class="mt-2"
-                                                           :messages="$errors->get('form.personal_photo')"/>
-                                            <x-input-info
-                                                    :messages="[
-                                                'فرمت‌های مجاز: png,jpg,jpeg,bmp',
-                                                'حداکثر حجم فایل: 5MB',
-                                            ]"
-                                                    type="info"
-                                                    class="mb-4"/>
-                                        </div>
-                                        <x-input-error class="mt-2"
-                                                       :messages="$errors->get('form.personal_photo')"/>
-                                        @if($this->personal_photo!=null) <x-image alt="برای نمایش کلیک کنید" src="{{ $this->personal_photo->src }}"/> @endif
                                     </div>
                                 </div>
                             </div>

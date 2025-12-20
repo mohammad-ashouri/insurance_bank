@@ -111,3 +111,6 @@
 .tagify__tag__removeBtn{
     @apply text-gray-700 dark:text-gray-300;
 }
+.tagify__input:empty::before {
+    color: #999 !important;
+}
