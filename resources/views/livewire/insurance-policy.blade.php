@@ -62,8 +62,8 @@
                                                 :tags="$insurance_types"
                                                 :allowUserInput="false"
                                                 placeholder-text="نوع بیمه را انتخاب کنید"
-                                                variable="form.owner_id"/>
-                                        <x-input-error class="mt-2" :messages="$errors->get('form.owner_id')"/>
+                                                variable="form.insurance_type"/>
+                                        <x-input-error class="mt-2" :messages="$errors->get('form.insurance_type')"/>
                                     </div>
                                     <div class="mt-4 space-y-1">
                                         <x-input-label value="تاریخ شروع بیمه نامه(اختیاری)"/>

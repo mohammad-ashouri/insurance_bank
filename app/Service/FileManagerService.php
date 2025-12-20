@@ -28,7 +28,7 @@ class FileManagerService
         ]);
     }
 
-    public static function getFile($post_id, $model, $file_type)
+    public static function getFile($post_id, $model, $file_type): ?File
     {
         return File::where('type', $file_type)
             ->where('model', $model)

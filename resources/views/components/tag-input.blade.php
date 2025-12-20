@@ -67,13 +67,9 @@
             }
 
             // هندل کردن تغییرات
-            this.tagify.on('add', (e) => {
-                const currentTags = this.tagify.value.map(tag => ({
-                    id: tag.value,
-                    label: tag.label
-                }));
-
-                @this.set('{{ $variable }}', currentTags);
+             this.tagify.on('add', (e) => {
+                const currentIds = this.tagify.value.map(tag => tag.value);
+                @this.set('{{ $variable }}', currentIds);
             });
 
             this.tagify.on('remove', (e) => {

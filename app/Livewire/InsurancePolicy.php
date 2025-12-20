@@ -51,36 +51,40 @@ class InsurancePolicy extends Component
         if (!auth()->user()->can('مدیریت بیمه نامه ها')) {
             abort(403, 'دسترسی غیرمجاز');
         }
-
-        $this->form->validate();
+        $this->form->validate([
+            'policy_holder_id' => 'required|array',
+            'policy_holder_id.*' => 'required|exists:policy_holders,id',
+            'owner_id' => 'required|array',
+            'owner_id.*' => 'required|exists:policy_holders,id',
+            'insurance_type' => 'required|array',
+            'insurance_type.*' => 'required|exists:insurance_types,id',
+        ]);
+        dd($this->form->insurance_type);
 
         $catalog = new \App\Models\InsurancePolicy();
-        $catalog->first_name = $this->form->first_name;
-        $catalog->last_name = $this->form->last_name;
-        $catalog->father_name = $this->form->father_name;
-        $catalog->national_code = $this->form->national_code;
-        $catalog->birthdate = $this->form->birthdate;
-        $catalog->mobile = $this->form->mobile;
-        $catalog->email = $this->form->email;
-        $catalog->address = $this->form->address;
-        $catalog->postal_code = $this->form->postal_code;
+        $catalog->policy_holder_id = $this->form->policy_holder_id;
+        $catalog->owner_id = $this->form->owner_id;
+        $catalog->insurance_type = $this->form->insurance_type;
+        $catalog->starts_at = $this->form->starts_at;
+        $catalog->ends_at = $this->form->ends_at;
+        $catalog->insurance_policy_number = $this->form->insurance_policy_number;
         $catalog->adder = auth()->user()->id;
         $catalog->save();
 
-        if ($this->form->national_photo_file_up) {
-            FileManagerService::saveFile($this->form->national_photo_file_up, 'policy_holders', $catalog->id, \App\Models\InsurancePolicy::class, 'national_photo_file_up');
+        if ($this->form->insurance_policy_photo) {
+            FileManagerService::saveFile($this->form->insurance_policy_photo, 'insurance_policy', $catalog->id, \App\Models\InsurancePolicy::class, 'insurance_policy_photo');
         }
 
-        if ($this->form->national_photo_file_down) {
-            FileManagerService::saveFile($this->form->national_photo_file_down, 'policy_holders', $catalog->id, \App\Models\InsurancePolicy::class, 'national_photo_file_down');
+        if ($this->form->attachment_insurance_photo) {
+            FileManagerService::saveFile($this->form->attachment_insurance_photo, 'insurance_policy', $catalog->id, \App\Models\InsurancePolicy::class, 'attachment_insurance_photo');
         }
 
-        if ($this->form->id_card_photo) {
-            FileManagerService::saveFile($this->form->id_card_photo, 'policy_holders', $catalog->id, \App\Models\InsurancePolicy::class, 'id_card_photo');
+        if ($this->form->vehicle_card_up) {
+            FileManagerService::saveFile($this->form->vehicle_card_up, 'insurance_policy', $catalog->id, \App\Models\InsurancePolicy::class, 'vehicle_card_up');
         }
 
-        if ($this->form->personal_photo) {
-            FileManagerService::saveFile($this->form->personal_photo, 'policy_holders', $catalog->id, \App\Models\InsurancePolicy::class, 'personal_photo');
+        if ($this->form->vehicle_card_down) {
+            FileManagerService::saveFile($this->form->vehicle_card_down, 'insurance_policy', $catalog->id, \App\Models\InsurancePolicy::class, 'vehicle_card_down');
         }
 
         $this->reset();
@@ -100,36 +104,33 @@ class InsurancePolicy extends Component
         }
 
         $catalog = \App\Models\InsurancePolicy::find($this->id);
-        $catalog->first_name = $this->form->first_name;
-        $catalog->last_name = $this->form->last_name;
-        $catalog->father_name = $this->form->father_name;
-        $catalog->national_code = $this->form->national_code;
-        $catalog->birthdate = $this->form->birthdate;
-        $catalog->mobile = $this->form->mobile;
-        $catalog->email = $this->form->email;
-        $catalog->address = $this->form->address;
-        $catalog->postal_code = $this->form->postal_code;
+        $catalog->policy_holder_id = $this->form->policy_holder_id;
+        $catalog->owner_id = $this->form->owner_id;
+        $catalog->insurance_type = $this->form->insurance_type;
+        $catalog->starts_at = $this->form->starts_at;
+        $catalog->ends_at = $this->form->ends_at;
+        $catalog->insurance_policy_number = $this->form->insurance_policy_number;
         $catalog->editor = auth()->user()->id;
         $catalog->save();
 
-        if ($this->form->national_photo_file_up) {
-            FileManagerService::deleteFile($catalog->id, \App\Models\InsurancePolicy::class, 'national_photo_file_up');
-            FileManagerService::saveFile($this->form->national_photo_file_up, 'policy_holders', $catalog->id, \App\Models\InsurancePolicy::class, 'national_photo_file_up');
+        if ($this->form->insurance_policy_photo) {
+            FileManagerService::deleteFile($catalog->id, \App\Models\InsurancePolicy::class, 'insurance_policy_photo');
+            FileManagerService::saveFile($this->form->insurance_policy_photo, 'insurance_policy', $catalog->id, \App\Models\InsurancePolicy::class, 'insurance_policy_photo');
         }
 
-        if ($this->form->national_photo_file_down) {
-            FileManagerService::deleteFile($catalog->id, \App\Models\InsurancePolicy::class, 'national_photo_file_down');
-            FileManagerService::saveFile($this->form->national_photo_file_down, 'policy_holders', $catalog->id, \App\Models\InsurancePolicy::class, 'national_photo_file_down');
+        if ($this->form->attachment_insurance_photo) {
+            FileManagerService::deleteFile($catalog->id, \App\Models\InsurancePolicy::class, 'attachment_insurance_photo');
+            FileManagerService::saveFile($this->form->attachment_insurance_photo, 'insurance_policy', $catalog->id, \App\Models\InsurancePolicy::class, 'attachment_insurance_photo');
         }
 
-        if ($this->form->id_card_photo) {
-            FileManagerService::deleteFile($catalog->id, \App\Models\InsurancePolicy::class, 'id_card_photo');
-            FileManagerService::saveFile($this->form->id_card_photo, 'policy_holders', $catalog->id, \App\Models\InsurancePolicy::class, 'id_card_photo');
+        if ($this->form->vehicle_card_up) {
+            FileManagerService::deleteFile($catalog->id, \App\Models\InsurancePolicy::class, 'vehicle_card_up');
+            FileManagerService::saveFile($this->form->vehicle_card_up, 'insurance_policy', $catalog->id, \App\Models\InsurancePolicy::class, 'vehicle_card_up');
         }
 
-        if ($this->form->personal_photo) {
-            FileManagerService::deleteFile($catalog->id, \App\Models\InsurancePolicy::class, 'personal_photo');
-            FileManagerService::saveFile($this->form->personal_photo, 'policy_holders', $catalog->id, \App\Models\InsurancePolicy::class, 'personal_photo');
+        if ($this->form->vehicle_card_down) {
+            FileManagerService::deleteFile($catalog->id, \App\Models\InsurancePolicy::class, 'vehicle_card_down');
+            FileManagerService::saveFile($this->form->vehicle_card_down, 'insurance_policy', $catalog->id, \App\Models\InsurancePolicy::class, 'vehicle_card_down');
         }
 
         $this->reset();
