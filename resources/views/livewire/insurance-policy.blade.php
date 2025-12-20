@@ -25,7 +25,7 @@
                         </button>
                     @endcan
 
-                    <x-modal maxWidth="4xl" name="create">
+                    <x-modal maxWidth="5xl" name="create">
                         <form wire:submit="store">
                             <div class="p-4">
                                 <div class="flex items-center justify-between">
@@ -108,6 +108,28 @@
                                         </div>
                                         <x-input-error class="mt-2"
                                                        :messages="$errors->get('form.insurance_policy_photo')"/>
+                                    </div>
+                                    <div class="mt-4 space-y-1">
+                                        <div class="space-y-1 w-full">
+                                            <x-input-label value="تصویر الحاقیه(اختیاری)"/>
+                                            <x-filepond::upload wire:model="form.attachment_insurance_photo"
+                                                                :accept="'image/jpg,image/png,image/jpeg,image.bmp'"
+                                                                :allowMultiple="false"
+                                                                :instantUpload="true"
+                                                                server-headers='@json(["X-CSRF-TOKEN" => csrf_token()])'
+                                                                :chunkSize="2000000"/>
+                                            <x-input-error class="mt-2"
+                                                           :messages="$errors->get('form.attachment_insurance_photo')"/>
+                                            <x-input-info
+                                                    :messages="[
+                                                'فرمت‌های مجاز: png,jpg,jpeg,bmp',
+                                                'حداکثر حجم فایل: 5MB',
+                                            ]"
+                                                    type="info"
+                                                    class="mb-4"/>
+                                        </div>
+                                        <x-input-error class="mt-2"
+                                                       :messages="$errors->get('form.attachment_insurance_photo')"/>
                                     </div>
                                     <div class="mt-4 space-y-1">
                                         <div class="space-y-1 w-full">
