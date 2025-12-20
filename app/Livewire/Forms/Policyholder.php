@@ -44,6 +44,12 @@ class Policyholder extends Form
     public $national_photo_file_down;
 
     #[Validate('nullable|file|mimes:jpeg,jpg,png,bmp|max:5120')]
+    public $vehicle_registration_card_up;
+
+    #[Validate('nullable|file|mimes:jpeg,jpg,png,bmp|max:5120')]
+    public $vehicle_registration_card_down;
+
+    #[Validate('nullable|file|mimes:jpeg,jpg,png,bmp|max:5120')]
     public $id_card_photo;
 
     #[Validate('nullable|file|mimes:jpeg,jpg,png,bmp|max:5120')]

@@ -185,6 +185,50 @@
                                         <x-input-error class="mt-2"
                                                        :messages="$errors->get('form.personal_photo')"/>
                                     </div>
+                                    <div class="mt-4 space-y-1">
+                                        <div class="space-y-1 w-full">
+                                            <x-input-label value="تصویر گواهینامه (رو)(اختیاری)"/>
+                                            <x-filepond::upload wire:model="form.vehicle_registration_card_up"
+                                                                :accept="'image/jpg,image/png,image/jpeg,image.bmp'"
+                                                                :allowMultiple="false"
+                                                                :instantUpload="true"
+                                                                server-headers='@json(["X-CSRF-TOKEN" => csrf_token()])'
+                                                                :chunkSize="2000000"/>
+                                            <x-input-error class="mt-2"
+                                                           :messages="$errors->get('form.vehicle_registration_card_up')"/>
+                                            <x-input-info
+                                                    :messages="[
+                                                'فرمت‌های مجاز: png,jpg,jpeg,bmp',
+                                                'حداکثر حجم فایل: 5MB',
+                                            ]"
+                                                    type="info"
+                                                    class="mb-4"/>
+                                        </div>
+                                        <x-input-error class="mt-2"
+                                                       :messages="$errors->get('form.vehicle_registration_card_up')"/>
+                                    </div>
+                                    <div class="mt-4 space-y-1">
+                                        <div class="space-y-1 w-full">
+                                            <x-input-label value="تصویر گواهینامه (پشت)(اختیاری)"/>
+                                            <x-filepond::upload wire:model="form.vehicle_registration_card_down"
+                                                                :accept="'image/jpg,image/png,image/jpeg,image.bmp'"
+                                                                :allowMultiple="false"
+                                                                :instantUpload="true"
+                                                                server-headers='@json(["X-CSRF-TOKEN" => csrf_token()])'
+                                                                :chunkSize="2000000"/>
+                                            <x-input-error class="mt-2"
+                                                           :messages="$errors->get('form.vehicle_registration_card_down')"/>
+                                            <x-input-info
+                                                    :messages="[
+                                                'فرمت‌های مجاز: png,jpg,jpeg,bmp',
+                                                'حداکثر حجم فایل: 5MB',
+                                            ]"
+                                                    type="info"
+                                                    class="mb-4"/>
+                                        </div>
+                                        <x-input-error class="mt-2"
+                                                       :messages="$errors->get('form.vehicle_registration_card_down')"/>
+                                    </div>
                                 </div>
                             </div>
                             <div class="flex items-center justify-end gap-4 p-4">
@@ -355,6 +399,52 @@
                                         <x-input-error class="mt-2"
                                                        :messages="$errors->get('form.personal_photo')"/>
                                         @if($this->personal_photo!=null) <x-image alt="برای نمایش کلیک کنید" src="{{ $this->personal_photo->src }}"/> @endif
+                                    </div>
+                                    <div class="mt-4 space-y-1">
+                                        <div class="space-y-1 w-full">
+                                            <x-input-label value="تصویر گواهینامه (رو)(اختیاری)"/>
+                                            <x-filepond::upload wire:model="form.vehicle_registration_card_up"
+                                                                :accept="'image/jpg,image/png,image/jpeg,image.bmp'"
+                                                                :allowMultiple="false"
+                                                                :instantUpload="true"
+                                                                server-headers='@json(["X-CSRF-TOKEN" => csrf_token()])'
+                                                                :chunkSize="2000000"/>
+                                            <x-input-error class="mt-2"
+                                                           :messages="$errors->get('form.vehicle_registration_card_up')"/>
+                                            <x-input-info
+                                                    :messages="[
+                                                'فرمت‌های مجاز: png,jpg,jpeg,bmp',
+                                                'حداکثر حجم فایل: 5MB',
+                                            ]"
+                                                    type="info"
+                                                    class="mb-4"/>
+                                        </div>
+                                        <x-input-error class="mt-2"
+                                                       :messages="$errors->get('form.vehicle_registration_card_up')"/>
+                                        @if($this->vehicle_registration_card_up!=null) <x-image alt="برای نمایش کلیک کنید" src="{{ $this->vehicle_registration_card_up->src }}"/> @endif
+                                    </div>
+                                    <div class="mt-4 space-y-1">
+                                        <div class="space-y-1 w-full">
+                                            <x-input-label value="تصویر گواهینامه (پشت)(اختیاری)"/>
+                                            <x-filepond::upload wire:model="form.vehicle_registration_card_down"
+                                                                :accept="'image/jpg,image/png,image/jpeg,image.bmp'"
+                                                                :allowMultiple="false"
+                                                                :instantUpload="true"
+                                                                server-headers='@json(["X-CSRF-TOKEN" => csrf_token()])'
+                                                                :chunkSize="2000000"/>
+                                            <x-input-error class="mt-2"
+                                                           :messages="$errors->get('form.vehicle_registration_card_down')"/>
+                                            <x-input-info
+                                                    :messages="[
+                                                'فرمت‌های مجاز: png,jpg,jpeg,bmp',
+                                                'حداکثر حجم فایل: 5MB',
+                                            ]"
+                                                    type="info"
+                                                    class="mb-4"/>
+                                        </div>
+                                        <x-input-error class="mt-2"
+                                                       :messages="$errors->get('form.vehicle_registration_card_down')"/>
+                                        @if($this->vehicle_registration_card_down!=null) <x-image alt="برای نمایش کلیک کنید" src="{{ $this->vehicle_registration_card_down->src }}"/> @endif
                                     </div>
                                 </div>
                             </div>

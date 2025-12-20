@@ -32,6 +32,9 @@ class Policyholder extends Component
 
     public $national_photo_file_up = null;
     public $national_photo_file_down = null;
+
+    public $vehicle_registration_card_up = null;
+    public $vehicle_registration_card_down = null;
     public $id_card_photo = null;
     public $personal_photo = null;
 
@@ -83,6 +86,14 @@ class Policyholder extends Component
             FileManagerService::saveFile($this->form->national_photo_file_down, 'policy_holders', $catalog->id, \App\Models\Policyholder::class, 'national_photo_file_down');
         }
 
+        if ($this->form->vehicle_registration_card_up) {
+            FileManagerService::saveFile($this->form->vehicle_registration_card_up, 'policy_holders', $catalog->id, \App\Models\Policyholder::class, 'vehicle_registration_card_up');
+        }
+
+        if ($this->form->vehicle_registration_card_down) {
+            FileManagerService::saveFile($this->form->vehicle_registration_card_down, 'policy_holders', $catalog->id, \App\Models\Policyholder::class, 'vehicle_registration_card_down');
+        }
+
         if ($this->form->id_card_photo) {
             FileManagerService::saveFile($this->form->id_card_photo, 'policy_holders', $catalog->id, \App\Models\Policyholder::class, 'id_card_photo');
         }
@@ -130,6 +141,16 @@ class Policyholder extends Component
             FileManagerService::saveFile($this->form->national_photo_file_down, 'policy_holders', $catalog->id, \App\Models\Policyholder::class, 'national_photo_file_down');
         }
 
+        if ($this->form->vehicle_registration_card_up) {
+            FileManagerService::deleteFile($catalog->id, \App\Models\Policyholder::class, 'vehicle_registration_card_up');
+            FileManagerService::saveFile($this->form->vehicle_registration_card_up, 'policy_holders', $catalog->id, \App\Models\Policyholder::class, 'vehicle_registration_card_up');
+        }
+
+        if ($this->form->vehicle_registration_card_down) {
+            FileManagerService::deleteFile($catalog->id, \App\Models\Policyholder::class, 'vehicle_registration_card_down');
+            FileManagerService::saveFile($this->form->vehicle_registration_card_down, 'policy_holders', $catalog->id, \App\Models\Policyholder::class, 'vehicle_registration_card_down');
+        }
+
         if ($this->form->id_card_photo) {
             FileManagerService::deleteFile($catalog->id, \App\Models\Policyholder::class, 'id_card_photo');
             FileManagerService::saveFile($this->form->id_card_photo, 'policy_holders', $catalog->id, \App\Models\Policyholder::class, 'id_card_photo');
@@ -174,6 +195,8 @@ class Policyholder extends Component
         $this->national_photo_file_down = FileManagerService::getFile($catalog->id, \App\Models\Policyholder::class, 'national_photo_file_down');
         $this->id_card_photo = FileManagerService::getFile($catalog->id, \App\Models\Policyholder::class, 'id_card_photo');
         $this->personal_photo = FileManagerService::getFile($catalog->id, \App\Models\Policyholder::class, 'personal_photo');
+        $this->vehicle_registration_card_up = FileManagerService::getFile($catalog->id, \App\Models\Policyholder::class, 'vehicle_registration_card_up');
+        $this->vehicle_registration_card_down = FileManagerService::getFile($catalog->id, \App\Models\Policyholder::class, 'vehicle_registration_card_down');
     }
 
     /**
