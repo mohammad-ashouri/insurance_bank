@@ -34,7 +34,7 @@ class InsurancePolicy extends Model
 
     public function policyholderInfo(): BelongsTo
     {
-        return $this->belongsTo(policyholder::class);
+        return $this->belongsTo(policyholder::class,'policyholder_id');
     }
 
     public function ownerInfo(): BelongsTo

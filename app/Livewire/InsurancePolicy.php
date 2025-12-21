@@ -21,7 +21,12 @@ class InsurancePolicy extends Component
      *
      * @var Forms\InsurancePolicy
      */
-    public \App\Livewire\Forms\InsurancePolicy $form;
+    public Forms\InsurancePolicy $form;
+
+    public $insurance_policy_photo = null;
+    public $attachment_insurance_photo = null;
+    public $vehicle_card_up = null;
+    public $vehicle_card_down = null;
 
     public ?int $id;
 
@@ -51,20 +56,20 @@ class InsurancePolicy extends Component
         if (!auth()->user()->can('مدیریت بیمه نامه ها')) {
             abort(403, 'دسترسی غیرمجاز');
         }
+        $this->form->validate();
         $this->form->validate([
             'policy_holder_id' => 'required|array',
-            'policy_holder_id.*' => 'required|exists:policy_holders,id',
+            'policy_holder_id.*' => 'required|exists:policyholders,id',
             'owner_id' => 'required|array',
-            'owner_id.*' => 'required|exists:policy_holders,id',
+            'owner_id.*' => 'required|exists:policyholders,id',
             'insurance_type' => 'required|array',
             'insurance_type.*' => 'required|exists:insurance_types,id',
         ]);
-        dd($this->form->insurance_type);
 
         $catalog = new \App\Models\InsurancePolicy();
-        $catalog->policy_holder_id = $this->form->policy_holder_id;
-        $catalog->owner_id = $this->form->owner_id;
-        $catalog->insurance_type = $this->form->insurance_type;
+        $catalog->policyholder_id = (int)$this->form->policy_holder_id[0];
+        $catalog->owner_id = (int)$this->form->owner_id[0];
+        $catalog->insurance_type_id = (int)$this->form->insurance_type[0];
         $catalog->starts_at = $this->form->starts_at;
         $catalog->ends_at = $this->form->ends_at;
         $catalog->insurance_policy_number = $this->form->insurance_policy_number;
@@ -102,6 +107,15 @@ class InsurancePolicy extends Component
         if (!auth()->user()->can('مدیریت بیمه نامه ها')) {
             abort(403, 'دسترسی غیرمجاز');
         }
+        $this->form->validate();
+        $this->form->validate([
+            'policy_holder_id' => 'required|array',
+            'policy_holder_id.*' => 'required|exists:policyholders,id',
+            'owner_id' => 'required|array',
+            'owner_id.*' => 'required|exists:policyholders,id',
+            'insurance_type' => 'required|array',
+            'insurance_type.*' => 'required|exists:insurance_types,id',
+        ]);
 
         $catalog = \App\Models\InsurancePolicy::find($this->id);
         $catalog->policy_holder_id = $this->form->policy_holder_id;

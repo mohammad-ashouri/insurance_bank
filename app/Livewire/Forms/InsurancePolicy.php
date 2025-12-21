@@ -8,12 +8,17 @@ use Livewire\Form;
 class InsurancePolicy extends Form
 {
     public $policy_holder_id;
+
     public $owner_id;
+
     public $insurance_type;
+
     #[Validate('nullable|date')]
     public $starts_at;
-    #[Validate('nullable|date')]
+
+    #[Validate('required|date')]
     public $ends_at;
+
     #[Validate('nullable|string|max:40')]
     public $insurance_policy_number;
 

@@ -195,62 +195,145 @@
                                 </div>
                                 <div class="grid grid-cols-3 gap-2">
                                     <div class="mt-4 space-y-1">
-                                        <x-input-label value="نام*"/>
-                                        <x-text-input wire:model="form.first_name" class="w-full"
-                                                      placeholder="نام را وارد کنید"/>
-                                        <x-input-error class="mt-2" :messages="$errors->get('form.first_name')"/>
+                                        <x-input-label value="بیمه گذار*"/>
+                                        <x-tag-input
+                                                :tags="$policyholders"
+                                                :allowUserInput="false"
+                                                placeholder-text="بیمه گذار را انتخاب کنید"
+                                                variable="form.policy_holder_id"/>
+                                        <x-input-error class="mt-2" :messages="$errors->get('form.policy_holder_id')"/>
                                     </div>
                                     <div class="mt-4 space-y-1">
-                                        <x-input-label value="نام خانوادگی*"/>
-                                        <x-text-input wire:model="form.last_name" class="w-full"
-                                                      placeholder="نام خانوادگی را وارد کنید"/>
-                                        <x-input-error class="mt-2" :messages="$errors->get('form.last_name')"/>
+                                        <x-input-label value="مالک وسیله نقلیه*"/>
+                                        <x-tag-input
+                                                :tags="$policyholders"
+                                                :allowUserInput="false"
+                                                placeholder-text="مالک وسیله نقلیه را انتخاب کنید"
+                                                variable="form.owner_id"/>
+                                        <x-input-error class="mt-2" :messages="$errors->get('form.owner_id')"/>
                                     </div>
                                     <div class="mt-4 space-y-1">
-                                        <x-input-label value="نام پدر(اختیاری)"/>
-                                        <x-text-input wire:model="form.father_name" class="w-full"
-                                                      placeholder="نام پدر را وارد کنید"/>
-                                        <x-input-error class="mt-2" :messages="$errors->get('form.father_name')"/>
+                                        <x-input-label value="نوع بیمه*"/>
+                                        <x-tag-input
+                                                :tags="$insurance_types"
+                                                :allowUserInput="false"
+                                                placeholder-text="نوع بیمه را انتخاب کنید"
+                                                variable="form.insurance_type"/>
+                                        <x-input-error class="mt-2" :messages="$errors->get('form.insurance_type')"/>
                                     </div>
                                     <div class="mt-4 space-y-1">
-                                        <x-input-label value="کد ملی(اختیاری)"/>
-                                        <x-text-input wire:model="form.national_code" class="w-full"
-                                                      placeholder="کد ملی را وارد کنید"/>
-                                        <x-input-error class="mt-2" :messages="$errors->get('form.national_code')"/>
-                                    </div>
-                                    <div class="mt-4 space-y-1">
-                                        <x-input-label value="تاریخ تولد(اختیاری)"/>
-                                        <x-text-input wire:model="form.birthdate" class="w-full"
+                                        <x-input-label value="تاریخ شروع بیمه نامه(اختیاری)"/>
+                                        <x-text-input wire:model="form.starts_at" class="w-full"
                                                       data-jdp
-                                                      data-jdp-max-date="today"
-                                                      placeholder="تاریخ تولد را وارد کنید"/>
-                                        <x-input-error class="mt-2" :messages="$errors->get('form.birthdate')"/>
+                                                      placeholder="تاریخ شروع بیمه نامه را وارد کنید"/>
+                                        <x-input-error class="mt-2" :messages="$errors->get('form.starts_at')"/>
                                     </div>
                                     <div class="mt-4 space-y-1">
-                                        <x-input-label value="موبایل*"/>
-                                        <x-text-input wire:model="form.mobile" class="w-full"
-                                                      placeholder="موبایل را وارد کنید"/>
-                                        <x-input-error class="mt-2" :messages="$errors->get('form.mobile')"/>
+                                        <x-input-label value="تاریخ پایان بیمه نامه*"/>
+                                        <x-text-input wire:model="form.ends_at" class="w-full"
+                                                      data-jdp
+                                                      placeholder="تاریخ پایان بیمه نامه را وارد کنید"/>
+                                        <x-input-error class="mt-2" :messages="$errors->get('form.ends_at')"/>
                                     </div>
                                     <div class="mt-4 space-y-1">
-                                        <x-input-label value="آدرس(اختیاری)"/>
-                                        <x-textbox
-                                                class="w-full"
-                                                placeholder="آدرس را وارد کنید"
-                                                wire:model="form.address"
-                                        />
+                                        <x-input-label value="شماره بیمه نامه(اختیاری)"/>
+                                        <x-text-input wire:model="form.insurance_policy_number" class="w-full"
+                                                      placeholder="شماره بیمه نامه را وارد کنید"/>
+                                        <x-input-error class="mt-2" :messages="$errors->get('form.insurance_policy_number')"/>
+                                    </div>
+                                </div>
+                                <div class="grid grid-cols-2 gap-2">
+                                    <div class="mt-4 space-y-1">
+                                        <div class="space-y-1 w-full">
+                                            <x-input-label value="تصویر کارت بیمه(اختیاری)"/>
+                                            <x-filepond::upload wire:model="form.insurance_policy_photo"
+                                                                :accept="'image/jpg,image/png,image/jpeg,image.bmp'"
+                                                                :allowMultiple="false"
+                                                                :instantUpload="true"
+                                                                server-headers='@json(["X-CSRF-TOKEN" => csrf_token()])'
+                                                                :chunkSize="2000000"/>
+                                            <x-input-error class="mt-2"
+                                                           :messages="$errors->get('form.insurance_policy_photo')"/>
+                                            <x-input-info
+                                                    :messages="[
+                                                'فرمت‌های مجاز: png,jpg,jpeg,bmp',
+                                                'حداکثر حجم فایل: 5MB',
+                                            ]"
+                                                    type="info"
+                                                    class="mb-4"/>
+                                        </div>
+                                        <x-input-error class="mt-2"
+                                                       :messages="$errors->get('form.insurance_policy_photo')"/>
+                                        @if($this->insurance_policy_photo!=null) <x-image alt="برای نمایش کلیک کنید" src="{{ $this->insurance_policy_photo->src }}"/> @endif
                                     </div>
                                     <div class="mt-4 space-y-1">
-                                        <x-input-label value="کدپستی(اختیاری)"/>
-                                        <x-text-input wire:model="form.postal_code" class="w-full"
-                                                      placeholder="کدپستی را وارد کنید"/>
-                                        <x-input-error class="mt-2" :messages="$errors->get('form.postal_code')"/>
+                                        <div class="space-y-1 w-full">
+                                            <x-input-label value="تصویر الحاقیه(اختیاری)"/>
+                                            <x-filepond::upload wire:model="form.attachment_insurance_photo"
+                                                                :accept="'image/jpg,image/png,image/jpeg,image.bmp'"
+                                                                :allowMultiple="false"
+                                                                :instantUpload="true"
+                                                                server-headers='@json(["X-CSRF-TOKEN" => csrf_token()])'
+                                                                :chunkSize="2000000"/>
+                                            <x-input-error class="mt-2"
+                                                           :messages="$errors->get('form.attachment_insurance_photo')"/>
+                                            <x-input-info
+                                                    :messages="[
+                                                'فرمت‌های مجاز: png,jpg,jpeg,bmp',
+                                                'حداکثر حجم فایل: 5MB',
+                                            ]"
+                                                    type="info"
+                                                    class="mb-4"/>
+                                        </div>
+                                        <x-input-error class="mt-2"
+                                                       :messages="$errors->get('form.attachment_insurance_photo')"/>
+                                        @if($this->attachment_insurance_photo!=null) <x-image alt="برای نمایش کلیک کنید" src="{{ $this->attachment_insurance_photo->src }}"/> @endif
                                     </div>
                                     <div class="mt-4 space-y-1">
-                                        <x-input-label value="ایمیل(اختیاری)"/>
-                                        <x-text-input wire:model="form.email" class="w-full"
-                                                      placeholder="ایمیل را وارد کنید"/>
-                                        <x-input-error class="mt-2" :messages="$errors->get('form.email')"/>
+                                        <div class="space-y-1 w-full">
+                                            <x-input-label value="تصویر کارت ماشین (رو)(اختیاری)"/>
+                                            <x-filepond::upload wire:model="form.vehicle_card_up"
+                                                                :accept="'image/jpg,image/png,image/jpeg,image.bmp'"
+                                                                :allowMultiple="false"
+                                                                :instantUpload="true"
+                                                                server-headers='@json(["X-CSRF-TOKEN" => csrf_token()])'
+                                                                :chunkSize="2000000"/>
+                                            <x-input-error class="mt-2"
+                                                           :messages="$errors->get('form.vehicle_card_up')"/>
+                                            <x-input-info
+                                                    :messages="[
+                                                'فرمت‌های مجاز: png,jpg,jpeg,bmp',
+                                                'حداکثر حجم فایل: 5MB',
+                                            ]"
+                                                    type="info"
+                                                    class="mb-4"/>
+                                        </div>
+                                        <x-input-error class="mt-2"
+                                                       :messages="$errors->get('form.vehicle_card_up')"/>
+                                        @if($this->vehicle_card_up!=null) <x-image alt="برای نمایش کلیک کنید" src="{{ $this->vehicle_card_up->src }}"/> @endif
+                                    </div>
+                                    <div class="mt-4 space-y-1">
+                                        <div class="space-y-1 w-full">
+                                            <x-input-label value="تصویر کارت ماشین (پشت)(اختیاری)"/>
+                                            <x-filepond::upload wire:model="form.vehicle_card_down"
+                                                                :accept="'image/jpg,image/png,image/jpeg,image.bmp'"
+                                                                :allowMultiple="false"
+                                                                :instantUpload="true"
+                                                                server-headers='@json(["X-CSRF-TOKEN" => csrf_token()])'
+                                                                :chunkSize="2000000"/>
+                                            <x-input-error class="mt-2"
+                                                           :messages="$errors->get('form.vehicle_card_down')"/>
+                                            <x-input-info
+                                                    :messages="[
+                                                'فرمت‌های مجاز: png,jpg,jpeg,bmp',
+                                                'حداکثر حجم فایل: 5MB',
+                                            ]"
+                                                    type="info"
+                                                    class="mb-4"/>
+                                        </div>
+                                        <x-input-error class="mt-2"
+                                                       :messages="$errors->get('form.vehicle_card_down')"/>
+                                        @if($this->vehicle_card_down!=null) <x-image alt="برای نمایش کلیک کنید" src="{{ $this->vehicle_card_down->src }}"/> @endif
                                     </div>
                                 </div>
                             </div>
