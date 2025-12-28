@@ -32,7 +32,7 @@ new class extends Component {
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" wire:navigate>
                         داشبورد
                     </x-nav-link>
-                    @canany(['مقادیر اولیه | مدیریت نقش های کاربری','مقادیر اولیه | مدیریت انواع بیمه'])
+                    @canany(['مقادیر اولیه | مدیریت نقش های کاربری'])
                         <div
                                 class="hidden sm:flex sm:items-center sm:ms-6">
                             <x-dropdown align="left" width="48">
@@ -58,27 +58,10 @@ new class extends Component {
                                             نقش های کاربری
                                         </x-dropdown-link>
                                     @endcan
-                                    @can('مقادیر اولیه | مدیریت انواع بیمه')
-                                        <x-dropdown-link :href="route('insurance-type')" wire:navigate>
-                                            انواع بیمه
-                                        </x-dropdown-link>
-                                    @endcan
                                 </x-slot>
                             </x-dropdown>
                         </div>
                     @endcanany
-                    @can('مدیریت بیمه گذاران')
-                        <x-nav-link :href="route('policyholders')"
-                                               :active="request()->routeIs('policyholders')" wire:navigate>
-                            مدیریت بیمه گذاران
-                        </x-nav-link>
-                    @endcan
-                    @can('مدیریت بیمه نامه ها')
-                        <x-nav-link :href="route('insurance-policy')"
-                                               :active="request()->routeIs('insurance-policy')" wire:navigate>
-                            مدیریت بیمه نامه ها
-                        </x-nav-link>
-                    @endcan
                     @can('مدیریت کاربران | منو')
                         <x-nav-link :href="route('users.index')" :active="request()->routeIs('users.index')"
                                     wire:navigate>
@@ -144,7 +127,7 @@ new class extends Component {
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" wire:navigate>
                 داشبورد
             </x-responsive-nav-link>
-            @canany(['مقادیر اولیه | مدیریت نقش های کاربری','مقادیر اولیه | انواع بیمه'])
+            @canany(['مقادیر اولیه | مدیریت نقش های کاربری'])
                 <div class="flex items-center sm:hidden">
                     <x-dropdown align="left" width="48">
                         <x-slot name="trigger">
@@ -169,25 +152,8 @@ new class extends Component {
                                     نقش های کاربری
                                 </x-dropdown-link>
                             @endcan
-                            @can('مقادیر اولیه | مدیریت انواع بیمه')
-                                <x-dropdown-link :href="route('insurance-type')" wire:navigate>
-                                    انواع بیمه
-                                </x-dropdown-link>
-                            @endcan
                         </x-slot>
                     </x-dropdown>
-                    @can('مدیریت بیمه گذاران')
-                        <x-responsive-nav-link :href="route('policyholders')"
-                                               :active="request()->routeIs('policyholders')" wire:navigate>
-                            مدیریت بیمه گذاران
-                        </x-responsive-nav-link>
-                    @endcan
-                    @can('مدیریت بیمه نامه ها')
-                        <x-responsive-nav-link :href="route('insurance-policy')"
-                                    :active="request()->routeIs('insurance-policy')" wire:navigate>
-                            مدیریت بیمه نامه ها
-                        </x-responsive-nav-link>
-                    @endcan
                 </div>
             @endcanany
             @can('مدیریت کاربران | منو')

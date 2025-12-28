@@ -1,47 +1,14 @@
-<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+<svg width="79" height="46" viewBox="0 0 79 46" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <g clip-path="url(#clip0_1_8035)">
+        <path d="M16.4975 14.9165H0V22.0546H16.4975V14.9165Z" fill="#FFB100"/>
+        <path d="M18.453 26.847H-0.0229492V33.7921H18.7377C19.653 33.7944 20.5598 33.6148 21.4054 33.2638C22.2511 32.9128 23.019 32.3973 23.6647 31.7472L30.3237 25.0721L25.2506 19.979L18.453 26.847Z" fill="#FFB100"/>
+        <path d="M57.3447 4.18272V11.2976H64.4657V4.15186L57.3447 4.18272Z" fill="#FFB100"/>
+        <path d="M43.018 14.9474H40.339L50.2699 4.91553L45.3583 -0.0078125L28.707 16.676L34.1881 22.0777H42.7487C43.3796 22.0777 43.9845 22.329 44.4306 22.7761C44.8767 23.2233 45.1273 23.8298 45.1273 24.4622V26.8467H35.4122L21.0933 41.2077L25.8047 46.0076L37.9604 33.8227H52.256V24.2076C52.256 21.7516 51.2828 19.3963 49.5503 17.6596C47.8178 15.923 45.4681 14.9474 43.018 14.9474Z" fill="#FFB100"/>
+        <path d="M69.5697 14.9165H57.3218V38.067L61.6867 33.7764H69.5543C72.0077 33.7061 74.3373 32.6798 76.0479 30.9154C77.7585 29.1509 78.7154 26.7875 78.7154 24.3272C78.7154 21.8668 77.7585 19.5034 76.0479 17.739C74.3373 15.9746 72.0077 14.9482 69.5543 14.8779L69.5697 14.9165ZM69.5697 26.9085H64.3042V22.0777H69.5697C70.2088 22.0777 70.8218 22.3322 71.2736 22.7852C71.7255 23.2381 71.9794 23.8525 71.9794 24.4931C71.9794 25.1297 71.7286 25.7406 71.2817 26.1929C70.8348 26.6452 70.2279 26.9024 69.5928 26.9085H69.5697Z" fill="#FFB100"/>
+    </g>
     <defs>
-        <linearGradient id="mainGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#667eea" />
-            <stop offset="100%" stop-color="#764ba2" />
-        </linearGradient>
-        <linearGradient id="dotGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#06B6D4" />
-            <stop offset="100%" stop-color="#3B82F6" />
-        </linearGradient>
+        <clipPath id="clip0_1_8035">
+            <rect width="79" height="46" fill="white"/>
+        </clipPath>
     </defs>
-
-    <!-- نماد اصلی - نمایش اکانت‌های متصل -->
-    <circle cx="100" cy="80" r="25" fill="url(#mainGrad)" opacity="0.9"/>
-
-    <!-- اکانت‌های متصل شده -->
-    <circle cx="60" cy="60" r="15" fill="url(#dotGrad)" opacity="0.8"/>
-    <circle cx="140" cy="60" r="15" fill="url(#dotGrad)" opacity="0.8"/>
-    <circle cx="60" cy="120" r="15" fill="url(#dotGrad)" opacity="0.8"/>
-    <circle cx="140" cy="120" r="15" fill="url(#dotGrad)" opacity="0.8"/>
-
-    <!-- خطوط ارتباطی مدرن با نقاط -->
-    <path d="M100 90 L75 70" stroke="url(#dotGrad)" stroke-width="3" stroke-dasharray="4 2" opacity="0.7"/>
-    <path d="M100 90 L125 70" stroke="url(#dotGrad)" stroke-width="3" stroke-dasharray="4 2" opacity="0.7"/>
-    <path d="M100 90 L75 110" stroke="url(#dotGrad)" stroke-width="3" stroke-dasharray="4 2" opacity="0.7"/>
-    <path d="M100 90 L125 110" stroke="url(#dotGrad)" stroke-width="3" stroke-dasharray="4 2" opacity="0.7"/>
-
-    <!-- نماد چرخ دنده برای مدیریت (سمت راست) -->
-    <g transform="translate(140, 140) scale(0.7)">
-        <circle cx="0" cy="0" r="12" fill="none" stroke="#667eea" stroke-width="2"/>
-        <path d="M0 -12 L0 -8 M8.5 -10.5 L6.5 -7 M10.5 8.5 L7 6.5 M0 12 L0 8 M-10.5 8.5 L-7 6.5 M-8.5 -10.5 L-6.5 -7"
-              stroke="#667eea" stroke-width="1.5"/>
-        <circle cx="0" cy="0" r="3" fill="#667eea"/>
-    </g>
-
-    <!-- نماد قفل برای امنیت (سمت چپ) -->
-    <g transform="translate(60, 140)">
-        <rect x="-8" y="-10" width="16" height="12" rx="2" fill="none" stroke="#06B6D4" stroke-width="2"/>
-        <rect x="-5" y="2" width="10" height="8" rx="1" fill="#06B6D4" opacity="0.7"/>
-        <circle cx="0" cy="-15" r="4" fill="none" stroke="#06B6D4" stroke-width="2"/>
-    </g>
-
-    <!-- متن فارسی با فونت مدرن -->
-    <text x="100" y="180" text-anchor="middle" fill="#fff" font-family="Tahoma, Arial, sans-serif" font-size="11" font-weight="bold" letter-spacing="0.5">
-        مدیریت بیمه نامه ها
-    </text>
 </svg>
