@@ -1,5 +1,6 @@
 <?php
 
+use App\Livewire\Catalogs\ThoughtResource;
 use App\Livewire\Catalogs\Roles;
 use App\Livewire\Dashboard;
 use App\Livewire\User\Profile;
@@ -19,6 +20,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::prefix('catalogs')->group(function () {
         Route::get('roles', Roles::class)->name('roles');
+        Route::get('thought_resources', ThoughtResource::class)->name('thought_resources');
     });
 
     Route::prefix('users')->group(function () {

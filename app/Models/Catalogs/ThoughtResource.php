@@ -1,28 +1,19 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Catalogs;
 
+use App\Models\File;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Policyholder extends Model
+class ThoughtResource extends Model
 {
-    use SoftDeletes;
-
-    protected $table = "policyholders";
+    protected $table = "thought_resources";
     protected $fillable = [
         'id',
-        'first_name',
-        'last_name',
-        'father_name',
-        'national_code',
-        'birthdate',
-        'mobile',
-        'email',
-        'address',
-        'postal_code',
+        'name',
         'status',
         'adder',
         'editor',
@@ -36,6 +27,14 @@ class Policyholder extends Model
         'deleted_at'
     ];
 
+    public function attachmentFile(): BelongsTo
+    {
+        return $this->belongsTo(File::class, 'id', 'model_id')
+            ->where('type', 'thought_resource_image')
+            ->where('model', ThoughtResource::class)
+            ->orderByDesc('id');
+    }
+
     public function adderInfo(): BelongsTo
     {
         return $this->belongsTo(User::class, 'adder');
@@ -44,14 +43,5 @@ class Policyholder extends Model
     public function editorInfo(): BelongsTo
     {
         return $this->belongsTo(User::class, 'editor');
-    }
-
-    /**
-     * Return policyholder full name
-     * @return string
-     */
-    public function getPolicyholderFullNameAttribute(): string
-    {
-        return "$this->first_name $this->last_name";
     }
 }

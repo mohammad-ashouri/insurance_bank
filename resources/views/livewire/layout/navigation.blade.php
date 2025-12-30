@@ -58,6 +58,11 @@ new class extends Component {
                                             نقش های کاربری
                                         </x-dropdown-link>
                                     @endcan
+                                    @can('مقادیر اولیه | مدیریت منبع اندیشه')
+                                        <x-dropdown-link :href="route('thought_resources')" wire:navigate>
+                                            منبع اندیشه
+                                        </x-dropdown-link>
+                                    @endcan
                                 </x-slot>
                             </x-dropdown>
                         </div>
@@ -150,6 +155,11 @@ new class extends Component {
                             @can('مقادیر اولیه | مدیریت نقش های کاربری')
                                 <x-dropdown-link :href="route('roles')" wire:navigate>
                                     نقش های کاربری
+                                </x-dropdown-link>
+                            @endcan
+                            @can('مقادیر اولیه | مدیریت نویسندگان بازتاب اندیشه')
+                                <x-dropdown-link :href="route('reflection_authors')" wire:navigate>
+                                    نویسندگان بازتاب اندیشه
                                 </x-dropdown-link>
                             @endcan
                         </x-slot>

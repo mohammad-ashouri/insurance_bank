@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class File extends Model
@@ -32,12 +33,12 @@ class File extends Model
         'deleted_at'
     ];
 
-    public function adderInfo(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    public function adderInfo(): BelongsTo
     {
         return $this->belongsTo(User::class, 'adder');
     }
 
-    public function editorInfo(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    public function editorInfo(): BelongsTo
     {
         return $this->belongsTo(User::class, 'editor');
     }
